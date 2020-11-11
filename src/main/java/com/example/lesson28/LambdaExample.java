@@ -1,11 +1,14 @@
 package com.example.lesson28;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 interface TriFunction<F, S, T, V> {
 
@@ -59,6 +62,16 @@ public class LambdaExample {
         return origin.get(0);
     }
 
+//    public static Optional<Double> average(int... scores) {
+//        if (scores == null || scores.length == 0)
+//            return Optional.empty();
+//        int sum = 0;
+//        for (int score : scores) {
+//            sum += score;
+//        }
+//        return sum;
+//    }
+
     public static void main(String[] args) {
 
         ArrayList<Integer> list = new ArrayList<>();
@@ -81,7 +94,25 @@ public class LambdaExample {
         //forEach(map(list, i -> Integer.toString(i) + ","), System.out::println);
         System.out.println(reduce(list, Integer::sum));
 
-    }
 
+//        Optional<Double> result = average();
+//        result.ifPresent(number -> System.out.println(number + 10));
+
+        Stream<Integer> stream = Stream.of(1, 2, 3, 4);
+        ArrayList<Integer> list2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        int[] array = {1, 2, 3, 4};
+
+        Stream<Integer> stream1 = list2.stream();
+        Stream<Integer> stream2 = Stream.of(1, 2, 3, 4);
+        Stream<Integer> stream3 = Stream.iterate(0, n -> n + 1);
+
+        long s = stream
+                .filter(n -> n % 2 == 0)
+                .map(n -> n + 10)
+                .limit(1)
+                .count();
+        System.out.println(s);
+
+    }
 
 }
