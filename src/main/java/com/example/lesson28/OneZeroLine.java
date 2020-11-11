@@ -1,34 +1,34 @@
 package com.example.lesson28;
 
-import java.util.ArrayList;
-
 public class OneZeroLine {
 
-    public static String maxOnesLine(String str) {
-        var onesLine = new ArrayList<Character>();
+    public static Integer maxOnesLine(String str) {
+        var count1 = 0;
+        var count2 = 0;
+
         if (str == null || str.isBlank()) {
-            return "Некорректная строка";
+            return -1;
         } else {
             for (int i = 0; i < str.length(); i++) {
                 var ch = str.charAt(i);
-                if (Character.isLetter(ch) && ch != '1' && ch != '0') {
-                    return "Некорректная строка";
-                } else if (ch == '1') {
-                    onesLine.add(ch);
+
+                if (Character.isLetter(ch) || ch != '1' && ch != '0') {
+                    return -1;
+                }
+
+                if (ch == '1') {
+                    count1++;
+                    if (i == str.length() - 1) {
+                        count2 = count1;
+                    }
                 } else {
-                    onesLine.clear();
+                    if (count1 > count2) {
+                        count2 = count1;
+                    }
+                    count1 = 0;
                 }
             }
         }
-        StringBuilder res = new StringBuilder();
-        if (!onesLine.isEmpty()) {
-            for (Character character : onesLine) {
-                String s = character.toString();
-                res.append(s);
-            }
-            return res.toString();
-        } else {
-            return "Некорректная строка";
-        }
+        return count2;
     }
 }

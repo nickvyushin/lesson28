@@ -17,16 +17,16 @@ public class OneZeroTest {
 
         var str = maxOnesLine("0000000");
 
-        assertThat(str).isEqualTo("Некорректная строка");
+        assertThat(str).isEqualTo(0);
     }
 
     @Test
     @DisplayName("Если строка состоит только из единиц")
     void testIfItOnlyOnesLine() throws Exception {
-        var str = "11111111";
-        var strres = maxOnesLine(str);
 
-        assertThat(strres).isNotEqualTo(str);
+        var str = maxOnesLine("11111");
+
+        assertThat(str).isEqualTo(5);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class OneZeroTest {
 
         var res = maxOnesLine("   ");
 
-        assertThat(res).isEqualTo("Некорректная строка");
+        assertThat(res).isEqualTo(-1);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class OneZeroTest {
 
         var res = maxOnesLine("000111300");
 
-        assertThat(res).isEqualTo("Некорректная строка");
+        assertThat(res).isEqualTo(-1);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class OneZeroTest {
 
         var res = maxOnesLine("0001111bikbl");
 
-        assertThat(res).isEqualTo("Некорректная строка");
+        assertThat(res).isEqualTo(-1);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class OneZeroTest {
 
         var res = maxOnesLine("");
 
-        assertThat(res).isEqualTo("Некорректная строка");
+        assertThat(res).isEqualTo(-1);
     }
 
     @Test
@@ -70,7 +70,15 @@ public class OneZeroTest {
     void testIfCorrectLine() throws Exception {
         var res = maxOnesLine("0011100011111");
 
-        assertThat(res).isEqualTo("11111");
+        assertThat(res).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Корректная строка с пятью единицами")
+    void testIfLineNull() throws Exception {
+        var res = maxOnesLine(null);
+
+        assertThat(res).isEqualTo(-1);
     }
 
 
